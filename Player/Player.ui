@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PlayerClass</class>
+ <widget class="QWidget" name="PlayerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1500</width>
+    <height>980</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1500</width>
+    <height>980</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Player</string>
+  </property>
+  <widget class="VideoWidget" name="video">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>720</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1280</width>
+     <height>720</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnFile">
+   <property name="geometry">
+    <rect>
+     <x>1360</x>
+     <y>850</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="PlayPosSlider" name="playPos">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>760</y>
+     <width>1091</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::groove:horizontal {
+    border: none;
+    height: 8px;
+    background: #3a3a3a;              /* 底轨，深灰略亮 */
+    border-radius: 4px;
+}
+
+QSlider::sub-page:horizontal {
+    background: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 #1e90ff,              /* 起始：亮蓝 (DodgerBlue) */
+        stop: 1 #00c3ff               /* 结束：青蓝 (Cyan) */
+    );
+    border-radius: 4px;
+}
+
+QSlider::add-page:horizontal {
+    background: #666666;              /* 未播放部分：浅灰偏亮，和背景区分 */
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+    background: qradialgradient(
+        cx: 0.5, cy: 0.5, radius: 0.6,
+        fx: 0.5, fy: 0.5,
+        stop: 0 #00c3ff,              /* 内圈亮青蓝 */
+        stop: 1 #0066ff               /* 外圈深蓝 */
+    );
+    border: 2px solid #66ccff;        /* 外环淡蓝，制造发光感 */
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    border-radius: 8px;               /* 圆形滑块 */
+    box-shadow: 0px 0px 8px #00c3ff;  /* 发光效果（部分 Qt 支持） */
+}
+
+QSlider::handle:horizontal:hover {
+    background: qradialgradient(
+        cx: 0.5, cy: 0.5, radius: 0.6,
+        fx: 0.5, fy: 0.5,
+        stop: 0 #66e0ff,
+        stop: 1 #0099ff
+    );
+    border: 2px solid #aee7ff;
+}
+
+QSlider::handle:horizontal:pressed {
+    background: #0099ff;              /* 按下时填充亮蓝 */
+    border: 2px solid #66ccff;
+}
+</string>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="currentTime">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>770</y>
+     <width>71</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>71</width>
+     <height>19</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>00:00:00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="totalTime">
+   <property name="geometry">
+    <rect>
+     <x>1190</x>
+     <y>760</y>
+     <width>71</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>71</width>
+     <height>19</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>00:00:00</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="isPlay">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>870</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnNet">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>870</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnPre">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>870</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnNext">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>870</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAudio">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>870</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDeleteFile">
+   <property name="geometry">
+    <rect>
+     <x>1420</x>
+     <y>850</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QSlider" name="audioSlider">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>890</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::groove:horizontal {
+    height: 6px;
+    background: #343434;
+    border: 1px solid #424242;
+    border-radius: 3px;
+}
+
+QSlider::sub-page:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #9370DB, stop:0.5 #8A2BE2, stop:1 #6A5ACD);
+    height: 6px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px rgba(138, 43, 226, 0.7);
+}
+
+QSlider::add-page:horizontal {
+    background: #3A3A3A;
+    height: 6px;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background: qradialgradient(cx:0.5, cy:0.5, radius:0.5,
+        stop:0 #FFFFFF, stop:0.6 #F0E8FF, stop:1 #E6E6FA);
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px rgba(138, 43, 226, 0.9);
+}</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="tbSpeed">
+   <property name="geometry">
+    <rect>
+     <x>1150</x>
+     <y>880</y>
+     <width>100</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="playList">
+   <property name="geometry">
+    <rect>
+     <x>1280</x>
+     <y>0</y>
+     <width>221</width>
+     <height>721</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>221</width>
+     <height>721</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* 主列表控件样式 */
+QListWidget {
+    background-color: #2D2D2D;         /* 背景色 */
+    border: 1px solid #3A3A3A;        /* 边框 */
+    border-radius: 4px;               /* 圆角 */
+    padding: 2px;                     /* 内边距 */
+    outline: 0;                       /* 移除焦点虚线框 */
+    font-family: &quot;Microsoft YaHei&quot;;   /* 字体 */
+    font-size: 12px;                  /* 字体大小 */
+    color: #CCCCCC;                   /* 默认文字颜色 */
+}
+
+/* 列表项样式 */
+QListWidget::item {
+    height: 28px;                     /* 项高度 */
+    padding-left: 8px;                /* 左侧内边距 */
+    background-color: transparent;    /* 默认透明背景 */
+}
+
+/* 鼠标悬停效果 */
+QListWidget::item:hover {
+    background-color: #3A3A3A;        /* 悬停背景色 */
+    border-radius: 3px;
+}
+
+/* 选中项效果 */
+QListWidget::item:selected {
+    background-color: #4A4A4A;        /* 选中背景色 */
+    color: #FFFFFF;                  /* 选中文字颜色 */
+    border-left: 3px solid #1E90FF;   /* 左侧高亮条 */
+}
+
+/* 滚动条样式 */
+QScrollBar:vertical {
+    width: 10px;                      /* 滚动条宽度 */
+    background: #2D2D2D;              /* 背景色 */
+}
+
+QScrollBar::handle:vertical {
+    background: #4A4A4A;              /* 滑块颜色 */
+    min-height: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #5A5A5A;              /* 悬停滑块颜色 */
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;                      /* 隐藏上下箭头 */
+}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMaxMin">
+   <property name="geometry">
+    <rect>
+     <x>1270</x>
+     <y>880</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">VideoWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PlayPosSlider</class>
+   <extends>QSlider</extends>
+   <header location="global">PlayPosSlider.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Player.qrc"/>
+ </resources>
+ <connections/>
+</ui>

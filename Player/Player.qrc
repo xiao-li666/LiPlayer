@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/Player">
+        <file>resource/audio.svg</file>
+        <file>resource/audio1.svg</file>
+        <file>resource/file.svg</file>
+        <file>resource/file1.svg</file>
+        <file>resource/list.svg</file>
+        <file>resource/list1.svg</file>
+        <file>resource/max.svg</file>
+        <file>resource/max1.svg</file>
+        <file>resource/min.svg</file>
+        <file>resource/min1.svg</file>
+        <file>resource/net.svg</file>
+        <file>resource/net1.svg</file>
+        <file>resource/next.svg</file>
+        <file>resource/next1.svg</file>
+        <file>resource/noaudio.svg</file>
+        <file>resource/noaudio1.svg</file>
+        <file>resource/pre.svg</file>
+        <file>resource/pre1.svg</file>
+        <file>resource/start.svg</file>
+        <file>resource/start1.svg</file>
+        <file>resource/stop.svg</file>
+        <file>resource/stop1.svg</file>
+    </qresource>
+</RCC>
