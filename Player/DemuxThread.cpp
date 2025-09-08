@@ -139,17 +139,12 @@ void DemuxThread::seek(double pos)
 		if (!pkt)break;
 		if (vt->RepaintPts(seekPos, pkt)) {
 			this->pts = seekPos;
-			emit positionChanged(seekPos, dex->getTotalTime());
 			break;
 		}
 	}
 	mux.unlock();
 	if (!state) {
 		setPause(false);
-	}
-	else
-	{
-		emit positionChanged(seekPos, dex->getTotalTime());
 	}
 }
 

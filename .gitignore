@@ -25,3 +25,16 @@ ipch/
 *.a
 *.out
 *.log
+Debug/
+Release/
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.log
+*.tlog/
+vc*.pdb
+ui_*.h
+moc_*.cpp
+y
+y.pub

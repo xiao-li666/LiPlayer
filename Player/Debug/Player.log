@@ -1,4 +1,0 @@
-﻿D:\vs\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output 目录未以斜杠结尾。  此生成实例将添加斜杠，因为必须有这个斜杠才能正确计算 Output 目录。
-   Qt/MSBuild: 3.3.1.1
-   Qt: 5.15.2
-  Player.vcxproj -> E:\cppCode\Qt_ffmpeg\bin\win32\Player.exe

@@ -70,7 +70,7 @@
     <ClCompile Include="PlayPosSlider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sonic.c">
+    <ClCompile Include="sonic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

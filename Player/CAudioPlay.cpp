@@ -19,12 +19,8 @@ bool CAudioPlay::Open()
 	fmt.setByteOrder(QAudioFormat::LittleEndian);
 	fmt.setSampleType(QAudioFormat::SignedInt);//重采样中音频输出格式为AV_SAMPLE_FMT_S16有符号，这里也设置为有符号，不然音量调节出现杂音
 
-	QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
-	if (!info.isFormatSupported(fmt)) {
-		fmt = info.nearestFormat(fmt);  // 若不支持，使用最接近的格式
-	}
-
 	out = new QAudioOutput(fmt);
+	//out->setBufferSize(sampleRate * channels * 2 * 0.5);
 	out->setVolume(currentVolum);//设置初始音量
 
 	io = out->start();

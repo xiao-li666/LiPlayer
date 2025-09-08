@@ -44,4 +44,10 @@ private:
 	float speed = 1.0f;
 
 	sonicStream sonic; // sonicÁ÷¶ÔÏó
+
+	int audioChannels = 2;
+	int maxSamples = 0;
+	unsigned char* pcm = NULL;
+	short* sonicInput = NULL;
+	short* sonicOutput = NULL;
 };

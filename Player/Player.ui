@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1500</width>
-    <height>980</height>
+    <width>1300</width>
+    <height>405</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -30,8 +30,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>1280</width>
-     <height>720</height>
+     <width>450</width>
+     <height>225</height>
     </size>
    </property>
   </widget>
@@ -316,7 +316,7 @@ QSlider::handle:horizontal {
    <property name="minimumSize">
     <size>
      <width>221</width>
-     <height>721</height>
+     <height>225</height>
     </size>
    </property>
    <property name="styleSheet">

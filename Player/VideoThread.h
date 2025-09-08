@@ -5,7 +5,7 @@
 #include "Decode.h"
 #include "VideoWidget.h"
 
-#define MAX_PACKSZIE 200
+#define MAX_PACKSZIE 400
 struct AVPacket;
 struct AVCodecParameters;
 class VideoThread :

@@ -108,7 +108,7 @@
     <ClCompile Include="DemuxThread.cpp" />
     <ClCompile Include="PlayPosSlider.cpp" />
     <ClCompile Include="Resample.cpp" />
-    <ClCompile Include="sonic.c" />
+    <ClCompile Include="sonic.cpp" />
     <ClCompile Include="VideoThread.cpp" />
     <ClCompile Include="VideoWidget.cpp" />
     <QtRcc Include="Player.qrc" />

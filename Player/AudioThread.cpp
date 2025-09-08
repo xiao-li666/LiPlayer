@@ -25,9 +25,19 @@ bool AudioThread::Open(AVCodecParameters * param)
 		return false;
 	}
 	Clear();
+	mux.lock();
 	pts = 0;
 	bool ret = true;
-	mux.lock();
+
+	if (pcm) delete[] pcm;
+	if (sonicInput) delete[] sonicInput;
+	if (sonicOutput) delete[] sonicOutput;
+
+	audioChannels = param->channels;
+	maxSamples = param->sample_rate * 2 * param->channels; // 2秒缓冲
+	pcm = new unsigned char[maxSamples * 2]; // 16位采样
+	sonicInput = new short[maxSamples]; // 16位采样
+	sonicOutput = new short[maxSamples]; // 16位采样
 
 	// 初始化sonic
 	if (sonic) {
@@ -65,9 +75,6 @@ bool AudioThread::Open(AVCodecParameters * param)
 
 void AudioThread::run()
 {
-	unsigned char* pcm = new unsigned char[1024 * 1024 * 10];
-	short* sonicInput = new short[1024 * 1024];  // sonic输入缓冲区
-	short* sonicOutput = new short[1024 * 1024]; // sonic输出缓冲区
 	while (!isExit) {
 		//mux.lock();
 		pausemux.lock();
@@ -106,16 +113,26 @@ void AudioThread::run()
 				//av_frame_free(&frame);
 				break;
 			}
-			// 将PCM数据转换为short类型（sonic需要16位PCM）
-			int numSamples = size / (2*ap->channels); // 每个样本2字节
-			memcpy(sonicInput, pcm, size);
+			int numSamplesPerChannel = size / (2 * audioChannels);;
 
-			// 写入sonic进行处理
-			sonicWriteShortToStream(sonic, sonicInput, numSamples);
+			// 拷贝 PCM 数据到 short 缓冲区
+			//size/2为采样点总数，而在sonic的输入缓冲为short类型的数组，每个元素对应一个采样点
+			memcpy(sonicInput, pcm, (size/2)*sizeof(short));
 
-			// 从sonic读取处理后的音频
-			int outSamples = sonicReadShortFromStream(sonic, sonicOutput, 1024 * 512);
-			int outSize = outSamples * 2*ap->channels; // 转回字节数
+			// 写入 sonic (自动处理多声道交错)
+			sonicWriteShortToStream(sonic, sonicInput, numSamplesPerChannel);
+
+			// 从sonic读取处理后的音频，返回每通道的采样点数
+			//int outSamples = sonicReadShortFromStream(sonic, sonicOutput, maxSamples/2);
+			int outSamples = 0;
+			int outSize = 0; // 转回字节数
+
+			//outSize = outSamples * 2 * audioChannels;//计算总字节数
+			while (!isExit) {
+				outSamples = sonicReadShortFromStream(sonic, sonicOutput, 1024);
+				if (outSamples <= 0) break;
+				outSize += outSamples * 2 * audioChannels;//计算总字节数
+			}
 
 			// 播放处理后的音频
 			while (!isExit && outSize > 0) {
@@ -132,9 +149,6 @@ void AudioThread::run()
 
 		mux.unlock();
 	}
-	delete[]pcm;
-	delete[] sonicInput;
-	delete[] sonicOutput;
 }
 
 void AudioThread::Push(AVPacket* pkt)
@@ -230,9 +244,6 @@ float AudioThread::getVolum()
 
 void AudioThread::setSpeed(float speed)
 {
-	// 确保速度在有效范围内
-	if (speed < SONIC_MIN_SPEED) speed = SONIC_MIN_SPEED;
-	if (speed > SONIC_MAX_SPEED) speed = SONIC_MAX_SPEED;
 
 	mux.lock();
 	this->speed = speed;
