@@ -1,0 +1,27 @@
+# 忽略 VS 工程缓存
+.vs/
+
+# 忽略编译产物
+Debug/
+Release/
+x64/
+ipch/
+
+# 忽略 Qt 生成文件
+*.pro.user
+*.qmake.stash
+*.qmake.cache
+
+# 通用编译产物
+*.obj
+*.pdb
+*.exe
+*.dll
+*.lib
+*.exp
+*.ilk
+*.o
+*.so
+*.a
+*.out
+*.log

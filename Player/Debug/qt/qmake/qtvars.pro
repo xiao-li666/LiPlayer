@@ -30,3 +30,5 @@ CONFIG += no_fixpath
 QT = core opengl gui multimedia widgets openglextensions
 CONFIG += no_fixpath
 QT = core opengl gui multimedia widgets openglextensions
+CONFIG += no_fixpath
+QT = core opengl gui multimedia widgets openglextensions
