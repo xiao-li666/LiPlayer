@@ -18,7 +18,7 @@ bool Demux::Open(const char* url)
 	}
 
 	av_dict_set(&opts, "rtsp_transport", "tcp", 0);
-	av_dict_set(&opts, "max_deleay", "500", 0);
+	av_dict_set(&opts, "max_delay", "1000000", 0);
 	mux.lock();
 	int ret = avformat_open_input(&ic, url, NULL, NULL);
 	if (ret < 0) {
